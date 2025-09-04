@@ -1,9 +1,12 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.xml.bind.annotation.XmlAttribute;
 
 public class Student {
     private int id;
+
+    @JsonIgnore
     private String name;
     private int age;
 
