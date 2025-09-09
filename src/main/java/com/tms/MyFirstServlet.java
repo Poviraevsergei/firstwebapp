@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.time.LocalTime;
 
-@WebServlet("/firstservlet")
+@WebServlet(name = "myfirstservlet", urlPatterns = "/firstservlet")
 public class MyFirstServlet extends HttpServlet {
 
     @Override
@@ -50,4 +50,4 @@ public class MyFirstServlet extends HttpServlet {
     }
 }
 
-//TODO: Filter, Listener, session, redirect
+//TODO: session, redirect
