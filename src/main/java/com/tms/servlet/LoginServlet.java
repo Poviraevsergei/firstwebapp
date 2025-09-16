@@ -20,11 +20,16 @@ public class LoginServlet extends HttpServlet {
 
         if (validator.validateLoginPassword(userLogin, userPassword)) {
             req.getSession().setAttribute("userLogin", userLogin);
-            getServletContext().getRequestDispatcher("/todolist.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/WEB-INF/pages/todolist.jsp").forward(req, resp);
         } else {
-            getServletContext().getRequestDispatcher("/login.html").forward(req, resp);
+            getServletContext().getRequestDispatcher("/WEB-INF/pages/login.html").forward(req, resp);
         }
         super.doPost(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/pages/login.html").forward(req, resp);
     }
 
     @Override
