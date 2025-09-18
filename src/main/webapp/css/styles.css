@@ -18,7 +18,7 @@ body {
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
 }
 
-input {
+.login-form input {
     display: block;
     width: 250px;
     height: 30px;
@@ -51,4 +51,117 @@ button:hover {
 .header-buttons {
     margin-top: 20px;
     margin-bottom: 100px;
+}
+
+.body-todo {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header-buttons-todo {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.header-buttons-todo button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.header-buttons-todo button:hover {
+    background-color: #45a049;
+}
+
+#logout-button {
+    background-color: #f44336;
+}
+
+#logout-button:hover {
+    background-color: #d32f2f;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-top: 0;
+}
+
+.form-task-todo form {
+    display: flex;
+    gap: 10px;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+#input-task {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+}
+
+#task-button {
+    padding: 10px 15px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    width: 120px;
+}
+
+#task-button:hover {
+    background-color: #0b7dda;
+}
+
+.task-list-todo {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+ol {
+    padding-left: 20px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.task-text {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+#delete-button {
+    padding: 5px 10px;
+    background-color: #ff5555;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#delete-button:hover {
+    background-color: #ff0000;
+}
+
+h4 {
+    color: #888;
+    font-style: italic;
 }

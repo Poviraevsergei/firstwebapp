@@ -1,54 +1,48 @@
-<%@ page import="java.util.Random" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String[] names = new String[4];
-    names[0] = "Natalia";
-    names[1] = "Arseniy";
-    names[2] = "Boris";
-
-    request.setAttribute("names", names);
-
-    request.setAttribute("randomNumber", new Random().nextInt(1,3));
-%>
 <html>
 <head>
     <title>Todo list</title>
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
-<body>
+<body class="body-todo">
+<div class="header-buttons-todo">
+    <form action="about-me" method="get">
+        <button type="submit" id="button-about-me">About me</button>
+    </form>
+    <form action="logout" method="post">
+        <button type="submit" id="button-logout">Logout</button>
+    </form>
+</div>
 
-ForEach
-<c:forEach var="name" items="${names}">
-    <c:out value="${name}"/>
-</c:forEach>
-
-If
-<c:if test="${show}">
-    <h1>Hello world if statement</h1>
+<c:if test="${username != null}">
+    <h1> Hello ${username}</h1>
 </c:if>
 
-Switch
-<c:choose>
-    <c:when test="${randomNumber == 1}">
-        <h1>This is one!</h1>
-    </c:when>
-    <c:when test="${randomNumber == 2}">
-        <h1>This is two!</h1>
-    </c:when>
-    <c:when test="${randomNumber == 3}">
-        <h1>This is three!</h1>
-    </c:when>
-    <c:otherwise>
-        <c:redirect url="/login"/>
-    </c:otherwise>
-</c:choose>
+<div class="form-task-todo">
+    <form action="todo" method="post">
+        <input type="text" id="input-task" name="task" placeholder="Enter your task" required>
+        <button type="submit" id="task-button">Add task</button>
+    </form>
+</div>
 
-<c:catch var="ex">
-    <%out.println(10/0);%>
-</c:catch>
+<div class="task-list-todo">
+    <h2>Task list:</h2>
 
-<c:if test="${ex != null}">
-    Oh Uh ...
-</c:if>
+    <c:if test="${tasks == null || tasks.isEmpty()}">
+        <h4>There are no active tasks!</h4>
+    </c:if>
 
+    <ol>
+        <c:forEach var="task" items="${tasks}">
+            <li>
+                <span class="task-text">${task}</span>
+                <form action="todo" method="post" class="delete-form">
+                    <input type="hidden" name="deleteTask" value="${task}">
+                    <input type="submit" id="delete-button" value="Remove"/>
+                </form>
+            </li>
+        </c:forEach>
+    </ol>
+</div>
 </body>
 </html>

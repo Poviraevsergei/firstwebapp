@@ -20,11 +20,10 @@ public class LoginServlet extends HttpServlet {
 
         if (validator.validateLoginPassword(userLogin, userPassword)) {
             req.getSession().setAttribute("username", userLogin);
-            getServletContext().getRequestDispatcher("/WEB-INF/pages/todolist.jsp").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/todo");
         } else {
             getServletContext().getRequestDispatcher("/WEB-INF/pages/login.html").forward(req, resp);
         }
-        super.doPost(req, resp);
     }
 
     @Override
