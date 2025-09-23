@@ -53,6 +53,10 @@ button:hover {
     margin-bottom: 100px;
 }
 
+#my-photo {
+    max-width: 100%;
+}
+
 .body-todo {
     max-width: 800px;
     margin: 0 auto;
