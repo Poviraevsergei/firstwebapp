@@ -1,5 +1,6 @@
 package com.tms.database;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,36 +13,18 @@ import java.util.List;
 public class UserRepository {
     private static final String INSERT_USER_SQL = "INSERT INTO users(id, username, user_password, created, changed, age, role) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_USERS_SQL = "SELECT * FROM users";
+    private static final String REMOVE_USERS_SQL = "CALL remove_users_by_username(?)";
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Connection connection = createConnection();
 
-        User user = new User(0,"Boris","Britva",null,null,47,"ADMIN");
-        int updatedLines = addUser(user,connection);
-
-        if (updatedLines == 1) {
-            System.out.println("User added successfully");
-        }
-
-        //3. Создание Statement
-        //3.1 Statement (недоступны ?)(Может быть SQL Injection)
-        //3.2 PreparedStatement (+)
-        PreparedStatement statementSelectUsers = connection.prepareStatement(SELECT_USERS_SQL);
-        //3.3 CallableStatement(запускает функции/хранимые процедуры)
-
-        //4. Запускаем statement(execute) executeQuery executeUpdate
-        ResultSet resultSet = statementSelectUsers.executeQuery();
-
-        //5.Парсинг ResultSet
-        List<User> userList = parseResultSetToUserList(resultSet);
-
-        System.out.println(userList);
+        removeUserByUsername("Transaction3", connection);
         connection.close();
     }
 
     public static int addUser(User user, Connection connection) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(INSERT_USER_SQL);
-        statement.setString(1,user.getUsername());
+        statement.setString(1, user.getUsername());
         statement.setString(2, user.getUserPassword());
         statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
         statement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
@@ -60,6 +43,12 @@ public class UserRepository {
                 System.getProperty("db_url"),
                 System.getProperty("db_login"),
                 System.getProperty("db_password"));
+    }
+
+    public static void removeUserByUsername(String username, Connection connection) throws SQLException {
+        CallableStatement callableStatement = connection.prepareCall(REMOVE_USERS_SQL);
+        callableStatement.setString(1, username);
+        callableStatement.execute();
     }
 
     public static List<User> parseResultSetToUserList(ResultSet resultSet) throws SQLException {
